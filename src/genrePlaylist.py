@@ -2,6 +2,7 @@
 
 import random
 import os
+import sys
 from os.path import join
 
 from hsaudiotag import auto
@@ -46,3 +47,9 @@ class Playlist():
 
         playlistFile.flush()
         playlistFile.close()
+
+if __name__ == "__main__":
+    for genre in sys.argv:
+        getByGenre(genre, os.getcwd())
+
+    generatePlaylist(os.getcwd())
