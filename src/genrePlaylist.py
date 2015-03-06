@@ -32,6 +32,8 @@ class Playlist():
     def filterArtist(self, artist):
         self.playlist = [track for track in self.playlist if auto.File(track).artist != artist]
 
+    def filterAlbum(self, album):
+        self.playlist = [track for track in self.playlist if auto.File(track).album != album]
 
     def generatePlaylist(self, directory, name="playlist", randomize=True):
         """Generates m3u file to parameter specification, no return value"""
@@ -50,6 +52,10 @@ class Playlist():
 # Run this file from directory to search
 # with genres as arguments
 if __name__ == "__main__":
+    if len(sys.argv) == 1:
+        print("Usage: List each genre as argument seperated by spaces")
+        sys.exit()
+
     playlist = Playlist()
     for genre in sys.argv:
         playlist.getByGenre(genre, os.getcwd())

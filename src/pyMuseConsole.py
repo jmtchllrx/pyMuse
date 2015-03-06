@@ -11,7 +11,7 @@ if len(sys.argv) == 1:
 
 playlist = Playlist()
 
-musicDir = input("Scan different directory? (Hit return for cwd)\n")
+musicDir = input("Scan different directory? (Hit return for cwd) ")
 print("working...")
 if len(musicDir) > 0:
     for genre in sys.argv:
@@ -21,14 +21,29 @@ else:
         playlist.getByGenre(genre, os.getcwd())
 
 
+print("playlist.m3u")
 for track in playlist.playlist:
     print (track)
 
-if input("Remove an artist? (y/n)") == "y":
-    playlist.filterArtist(input("Artist to remove?"))
+if input("Change artists, albums, or playlist name?(y/n) ") == "y":
+    if input("Remove an artist? (y/n) ") == "y":
+        artist = " "    
+        while artist != "":
+            artist = input("Artist to remove? (enter to finish)")
+            playlist.filterArtist(artist)
 
-name = input("Playlist name?\n")
-if len(name) > 0:
-    playlist.generatePlaylist(os.getcwd(), name)
+
+    if input("Remove an album? (y/n) ") == "y":
+        album = " "    
+        while album != "":
+            album = input("Album to remove? (enter to finish)")
+            playlist.filterAlbum(album)
+
+
+    name = input("Playlist name? ")
+    if len(name) > 0:
+        playlist.generatePlaylist(os.getcwd(), name)
+    else:
+        playlist.generatePlaylist(os.getcwd())
 else:
     playlist.generatePlaylist(os.getcwd())
