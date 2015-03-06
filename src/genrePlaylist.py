@@ -20,7 +20,7 @@ class Playlist():
         """
 
         #TODO 
-        # 1. turn self into cleaner list comprehension
+        # 1. turn into cleaner list comprehension
         # 2. change to absolute rather than relative paths
         #    in case user wants to output playlist
         #    in another directory
@@ -49,7 +49,8 @@ class Playlist():
         playlistFile.close()
 
 if __name__ == "__main__":
+    playlist = Playlist()
     for genre in sys.argv:
-        getByGenre(genre, os.getcwd())
+        playlist.getByGenre(genre, os.getcwd())
 
-    generatePlaylist(os.getcwd())
+    playlist.generatePlaylist(os.getcwd())
