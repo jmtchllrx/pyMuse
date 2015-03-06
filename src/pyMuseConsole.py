@@ -1,19 +1,24 @@
 #!/usr/bin/env python3
 import os
+import sys
 
 from genrePlaylist import Playlist
 
 
+if len(sys.argv) == 1:
+    print("Usage: List each genre as argument seperated by spaces")
+    sys.exit()
+
 playlist = Playlist()
 
-genre = input("Genre?\n")
-musicDir = input("Different directory? (Hit return for cwd)\n")
-
+musicDir = input("Scan different directory? (Hit return for cwd)\n")
 print("working...")
 if len(musicDir) > 0:
-    playlist.getByGenre(genre, musicDir)
+    for genre in sys.argv:
+        playlist.getByGenre(genre, musicDir)
 else:
-    playlist.getByGenre(genre, os.getcwd())
+    for genre in sys.argv:
+        playlist.getByGenre(genre, os.getcwd())
 
 
 for track in playlist.playlist:
@@ -22,10 +27,8 @@ for track in playlist.playlist:
 if input("Remove an artist? (y/n)") == "y":
     playlist.filterArtist(input("Artist to remove?"))
 
-
-if input("Edit output directory or name? (y/n)") == "y":
-    outputDir = input("Enter directory: ")
-    name = input("Enter playlist name: ")
-    playlist.generatePlaylist(playlist, outputDir, name)
+name = input("Playlist name?\n")
+if len(name) > 0:
+    playlist.generatePlaylist(os.getcwd(), name)
 else:
-    playlist.generatePlaylist(playlist, os.getcwd())
+    playlist.generatePlaylist(os.getcwd())

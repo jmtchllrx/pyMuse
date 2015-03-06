@@ -19,11 +19,9 @@ class Playlist():
         genre ID3 tags and returns a list of them
         """
 
-        #TODO 
-        # 1. turn into cleaner list comprehension
-        # 2. change to absolute rather than relative paths
-        #    in case user wants to output playlist
-        #    in another directory
+        # TODO 
+        # turn into list comprehension
+
         for root, dirs, files in os.walk(directory):
             for item in files:
                 if item[len(item)-4:len(item)] in self.FORMATS:
@@ -48,6 +46,9 @@ class Playlist():
         playlistFile.flush()
         playlistFile.close()
 
+
+# Run this file from directory to search
+# with genres as arguments
 if __name__ == "__main__":
     playlist = Playlist()
     for genre in sys.argv:
