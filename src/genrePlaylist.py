@@ -29,16 +29,28 @@ class Playlist():
                     # (The only good library is GPL, so I'm sticking with hsaudiotag)
                     path = root + b'/' + item
                     currentFile = open(path, 'rb')
-                    if auto.File(currentFile).genre == genre:
+                    if auto.File(currentFile).genre.lower() == genre.lower():
                         self.playlist.append(path)
                     currentFile.close()
 
 
     def filterArtist(self, artist):
-        self.playlist = [track for track in self.playlist if auto.File(track).artist != artist]
+        for track in self.playlist[:]:
+            currentFile = open(track, 'rb')
+            if auto.File(currentFile).artist == artist:
+                print(auto.File(currentFile).artist)
+                self.playlist.remove(track)
+            currentFile.close()
 
     def filterAlbum(self, album):
-        self.playlist = [track for track in self.playlist if auto.File(track).album != album]
+        for track in self.playlist[:]:
+            currentFile = open(track, 'rb')
+            if auto.File(currentFile).album == album:
+                print(auto.File(currentFile).album)
+                self.playlist.remove(track)
+            currentFile.close()
+
+
 
     def generatePlaylist(self, directory, name="playlist", randomize=True):
         """Generates m3u file to parameter specification, no return value"""
