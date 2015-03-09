@@ -6,7 +6,7 @@ All this program will do currently is give simple prompts and output a playlist 
 
 Use:
 
-Run src/pyMuseConsole.py [genre] [genre] [etc]
+Run ~/src/pyMuseConsole.py [genre] [genre] etc
 
 
 TODO
