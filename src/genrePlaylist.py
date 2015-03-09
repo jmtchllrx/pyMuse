@@ -37,23 +37,21 @@ class Playlist():
     def filterArtist(self, artist):
         for track in self.playlist[:]:
             currentFile = open(track, 'rb')
-            if auto.File(currentFile).artist == artist:
-                print(auto.File(currentFile).artist)
+            if auto.File(currentFile).artist.lower() == artist.lower():
                 self.playlist.remove(track)
             currentFile.close()
 
     def filterAlbum(self, album):
         for track in self.playlist[:]:
             currentFile = open(track, 'rb')
-            if auto.File(currentFile).album == album:
-                print(auto.File(currentFile).album)
+            if auto.File(currentFile).album.lower() == album.lower():
                 self.playlist.remove(track)
             currentFile.close()
 
 
-
     def generatePlaylist(self, directory, name="playlist", randomize=True):
         """Generates m3u file to parameter specification, no return value"""
+        
         if randomize:
             random.shuffle(self.playlist)
 
